@@ -1,0 +1,20 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+
+
+//https://www.godotforums.org/discussion/27487/passing-an-array-to-a-shader
+
+uniform sampler2D vectors;
+uniform float vectorsTextureWidth;
+uniform float vectorsTextureHeight;
+
+void fragment()
+{
+	ivec2 coord;
+	coord.x = int(UV.x * vectorsTextureWidth);
+	coord.y = int(UV.y * vectorsTextureHeight);
+	vec3 v = texelFetch(vectors, coord, 0).xyz;
+	EMISSION = v;
+}"
